@@ -1,0 +1,16 @@
+{
+  "name": "kevin muscara",
+  "short_name": "kevin muscara",
+  "description": "computer technician at west clermont school district.",
+  "icons": [
+    {
+      "src": "wc.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "fullscreen",
+  "theme_color": "#00234C",
+  "background_color": "#00234C"
+}
