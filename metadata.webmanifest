@@ -1,10 +1,10 @@
 {
-  "name": "kevin muscara",
-  "short_name": "kevin muscara",
-  "description": "computer technician at west clermont school district.",
+  "name": "Kevin Muscara",
+  "short_name": "Kevin Muscara",
+  "description": "Providing trustworthy and reliable tech support services with a personal touch. Need help with your computer or mobile device? I'm here to offer friendly, reliable, and affordable tech support for you.",
   "icons": [
     {
-      "src": "wc.png",
+      "src": "/images/logo.png",
       "sizes": "32x32",
       "type": "image/png"
     }
