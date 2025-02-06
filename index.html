@@ -26,8 +26,11 @@
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-  <!-- dotted -->
-  <div class="absolute z-0 min-h-screen min-w-full bg-white bg-[radial-gradient(#c9c9c9_1px,transparent_1px)] [background-size:24px_24px]">
+  <!-- dotted pattern-->
+  <div class="fixed z-0 min-h-screen min-w-full bg-white bg-[radial-gradient(#c9c9c9_1px,transparent_1px)] [background-size:24px_24px]"></div>
+
+  <!-- scrollable container -->
+  <div class="relative z-10">
     <!-- container -->
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-3xl">
@@ -164,6 +167,7 @@
         <!-- spacer -->
         <div class="py-4"></div>
 
+        <!-- footer -->
         <footer>
           <div class="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
             <div class="flex justify-center gap-x-6 md:order-2">
@@ -183,10 +187,8 @@
             <p class="mt-8 text-center text-sm/6 text-gray-600 md:order-1 md:mt-0">&copy; <script>document.write(new Date().getFullYear())</script> Muscara. All rights reserved.</p>
           </div>
         </footer>
-        
       </div>
     </div>
-    <!-- end container -->
   </div>
 </body>
 </html>
