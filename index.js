@@ -8,11 +8,7 @@ const postsContainer = document.getElementById("posts");
 
 const html = marked.parse(`# Hello this is a test post`);
 
-const postDiv = document.createElement("div");
-postDiv.className = "post";
-postDiv.innerHTML = html;
-
-postsContainer.appendChild(postDiv);
+postsContainer.innerHTML = html;
 
 // postFiles.forEach(async (filePath) => {
 //   try {
