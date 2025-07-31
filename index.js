@@ -6,18 +6,26 @@ const postFiles = [
 
 const postsContainer = document.getElementById("posts");
 
-postFiles.forEach(async (filePath) => {
-  try {
-    const response = await fetch(filePath);
-    const markdown = await response.text();
-    const html = marked.parse(markdown);
+const html = marked.parse(`# Hello this is a test post`);
 
-    const postDiv = document.createElement("div");
-    postDiv.className = "post";
-    postDiv.innerHTML = html;
+const postDiv = document.createElement("div");
+postDiv.className = "post";
+postDiv.innerHTML = html;
 
-    postsContainer.appendChild(postDiv);
-  } catch (err) {
-    console.error(`Error loading ${filePath}`, err);
-  }
-});
+postsContainer.appendChild(postDiv);
+
+// postFiles.forEach(async (filePath) => {
+//   try {
+//     const response = await fetch(filePath);
+//     const markdown = await response.text();
+//     const html = marked.parse(markdown);
+
+//     const postDiv = document.createElement("div");
+//     postDiv.className = "post";
+//     postDiv.innerHTML = html;
+
+//     postsContainer.appendChild(postDiv);
+//   } catch (err) {
+//     console.error(`Error loading ${filePath}`, err);
+//   }
+// });
