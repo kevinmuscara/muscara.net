@@ -1,4 +1,8 @@
 site_name: Kevin Muscara
+repo_url: https://github.com/kevinmuscara/muscara.net
+site_description: "Kevin Muscara's Personal Website"
+site_author: Kevin Muscara
+copyright: "2026, Kevin Muscara"
 nav:
   - Home: index.md
   - Projects:
