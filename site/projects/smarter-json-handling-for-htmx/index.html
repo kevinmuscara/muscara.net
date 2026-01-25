@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="generator" content="mkdocs-1.6.1, mkdocs-terminal-4.7.0">
+     
+     
+    <link rel="icon" type="image/png" sizes="192x192" href="../../img/android-chrome-192x192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="../../img/android-chrome-512x512.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon.png" />
+<link rel="shortcut icon" type="image/png" sizes="48x48" href="../../img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="../../img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="../../img/favicon-32x32.png" />
+
+
+    
+ 
+<title>Smarter JSON Handling for HTMX - Kevin Muscara</title>
+
+
+<link href="../../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+<link href="../../css/fontawesome/css/solid.min.css" rel="stylesheet">
+<link href="../../css/normalize.css" rel="stylesheet">
+<link href="../../css/terminal.css" rel="stylesheet">
+<link href="../../css/theme.css" rel="stylesheet">
+<link href="../../css/theme.tile_grid.css" rel="stylesheet">
+<link href="../../css/theme.footer.css" rel="stylesheet">
+<!-- sans color palette -->
+<link href="../../css/palettes/sans.css" rel="stylesheet">
+
+<!-- page layout -->
+<style>
+/* initially set page layout to a one column grid */
+.terminal-mkdocs-main-grid {
+    display: grid;
+    grid-column-gap: 1.4em;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+}
+
+/*  
+*   when side navigation is not hidden, use a two column grid.  
+*   if the screen is too narrow, fall back to the initial one column grid layout.
+*   in this case the main content will be placed under the navigation panel. 
+*/
+@media only screen and (min-width: 70em) {
+    .terminal-mkdocs-main-grid {
+        grid-template-columns: 4fr 9fr;
+    }
+}</style>
+
+
+
+     
+    
+    
+
+    
+    <!-- search css support -->
+<link href="../../css/search/bootstrap-modal.css" rel="stylesheet">
+<!-- search scripts -->
+<script>
+    var base_url = "../..",
+    shortcuts = "{}";
+</script>
+<script src="../../js/jquery/jquery-1.10.1.min.js" defer></script>
+<script src="../../js/bootstrap/bootstrap.min.js" defer></script>
+<script src="../../js/mkdocs/base.js" defer></script>
+    
+    
+    
+    
+    <script src="../../javascripts/remove_watermark.js"></script>
+    
+    <script src="../../search/main.js"></script>
+    
+
+    
+</head>
+
+<body class="terminal"><div class="container">
+    <div class="terminal-nav">
+        <header class="terminal-logo">
+            <div id="mkdocs-terminal-site-name" class="logo terminal-prompt"><a href="/" class="no-style">Kevin Muscara</a></div>
+        </header>
+        
+        <nav class="terminal-menu">
+            
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="../.." class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">Home</span>
+                    </a>
+                    <meta property="position" content="0">
+                </li>
+                
+                
+                
+                
+                
+                
+                
+                    
+                    
+
+
+<li property="itemListElement" typeof="ListItem">
+    <a href="#" class="menu-item" data-toggle="modal" data-target="#mkdocs_search_modal" property="item" typeof="SearchAction">
+        <i aria-hidden="true" class="fa fa-search"></i> <span property="name">Search</span>
+    </a>
+    <meta property="position" content="1">
+</li>
+                    
+            </ul>
+            
+        </nav>
+    </div>
+</div>
+        
+    <div class="container">
+        <div class="terminal-mkdocs-main-grid"><aside id="terminal-mkdocs-side-panel"><nav>
+  
+    <ul class="terminal-mkdocs-side-nav-items">
+        
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../..">Home</a>
+        
+    
+    
+    
+  </li>
+        
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+        
+        
+
+        
+            
+    
+        
+        <span class="
+        
+    
+
+    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">Projects</span>
+    
+    
+        
+      
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        <span class="
+
+    terminal-mkdocs-side-nav-item--active">Smarter JSON Handling for HTMX</span>
+    
+    </li>
+            
+        
+            
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="https://github.com/kevinmuscara/suicidal-ideation">Suicidal Ideation Classifier</a>
+        
+    
+    </li>
+            
+        
+            
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="https://github.com/kevinmuscara/mediapipe-pupil">Graphing Pupil Movement</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+  </li>
+        
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+        
+        
+
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    
+
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Conferences</span>
+        
+    
+    
+        
+      
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="https://brainstormk20.com/sandusky">BrainStorm 2026</a>
+        
+    
+    </li>
+            
+        
+            
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../../conferences/stlp22/">STLP 2022</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+  </li>
+        
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+        
+        
+
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    
+
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Experience</span>
+        
+    
+    
+        
+      
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="https://westcler.org">West Clermont School District</a>
+        
+    
+    </li>
+            
+        
+            
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="https://nku.edu">Northern Kentucky University</a>
+        
+    
+    </li>
+            
+        
+            
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="https://jessamine.k12.ky.us">Jessamine County Schools</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+  </li>
+        
+    </ul>
+  
+</nav>
+</aside>
+            <main id="terminal-mkdocs-main-content">
+<section id="mkdocs-terminal-content">
+    <h1 id="smarter-json-handling-for-htmx">Smarter JSON Handling for HTMX</h1>
+<p>While exploring the possibilities of <a href="https://htmx.org">HTMX</a> in projects, I faced the realization that some APIs needed for projects are not built to meet the standard of a hypermedia system. HTMX expects HTML fragments by default, handling JSON responses often means writing extra JavaScript just to massage that data into DOM updates, which goes against the spirit of HTMX's simplicity.</p>
+<p>This lead to the creation of <a href="https://www.npmjs.com/package/@muscara/htmx-jsonata">htmx-jsonata</a>. A tool that brings the power of <a href="https://jsonata.org/">JSONata</a> into workflows, letting you declaratively transform and bind data without sprawling client side code.</p>
+<h2 id="what-is-it">What is it?</h2>
+<p>JSONata is designed for querying and reshaping JSON responses with powerful expressions. HTMX traditionally works best with HTML over the wire. A server provides HTML partials that are preprocessed and directly swapped into the DOM. There are other htmx-json extensions, but none include expression based transformation out of the box.</p>
+<p>This tool serves as the first library that provides JSON responses a declarative way to drive DOM updates.</p>
+<h2 id="why-is-it-needed">Why is it needed?</h2>
+<p>This tool fills my developer needs for the following reasons:</p>
+<ol>
+<li>
+<p><strong>Keeping logic out of HTML templates</strong>: instead of manually writing DOM updates in JavaScript, I can transform the data structure to only whats needed.</p>
+</li>
+<li>
+<p><strong>Non hypermedia systems</strong>: APIs not following hypermedia principals will still return JSON, this library allows those APIs to still be used in HTMX.</p>
+</li>
+</ol>
+<h2 id="how-it-works">How it works</h2>
+<p>I won't go into a deep dive, but the typical pattern is as follows:</p>
+<ol>
+<li><strong>Issue a GET request</strong> that expects a JSON response.</li>
+<li><strong>Apply a JSONata expression</strong> to the JSON response to transform the data.</li>
+<li><strong>Update the DOM</strong> based on the transformed result by binding values to elements.</li>
+</ol>
+<p>Before <code>htmx-jsonata</code>:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>&lt;<span style="color: #008000; font-weight: bold">h1</span> <span style="color: #687822">id</span><span style="color: #666666">=</span><span style="color: #BA2121">&quot;title&quot;</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">h1</span>&gt;
+&lt;<span style="color: #008000; font-weight: bold">p</span> <span style="color: #687822">id</span><span style="color: #666666">=</span><span style="color: #BA2121">&quot;status&quot;</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">p</span>&gt;
+
+&lt;<span style="color: #008000; font-weight: bold">script</span>&gt;
+<span style="color: #bbbbbb">  </span><span style="color: #3D7B7B; font-style: italic">// Make the GET request</span>
+<span style="color: #bbbbbb">  </span>fetch(<span style="color: #BA2121">&quot;/api/v2/summary.json&quot;</span>).then(res<span style="color: #bbbbbb"> </span>=&gt;<span style="color: #bbbbbb"> </span>res.json()).then(data<span style="color: #bbbbbb"> </span>=&gt;<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Extract what you need from the data</span>
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">let</span><span style="color: #bbbbbb"> </span>specialPrograms<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>data.components.filter(resource<span style="color: #bbbbbb"> </span>=&gt;<span style="color: #bbbbbb"> </span>resource.title<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39;Special Programs&#39;</span>);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">let</span><span style="color: #bbbbbb"> </span>{<span style="color: #bbbbbb"> </span>name,<span style="color: #bbbbbb"> </span>status<span style="color: #bbbbbb"> </span>}<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>specialPrograms;
+
+<span style="color: #bbbbbb">    </span><span style="color: #008000">document</span>.querySelector(<span style="color: #BA2121">&quot;#title&quot;</span>).textContent<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>name;
+<span style="color: #bbbbbb">    </span><span style="color: #008000">document</span>.querySelector(<span style="color: #BA2121">&quot;#count&quot;</span>).textContent<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>status;
+<span style="color: #bbbbbb">  </span>});
+&lt;/<span style="color: #008000; font-weight: bold">script</span>&gt;
+</code></pre></div>
+<p>After <code>htmx-jsonata</code>:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>&lt;<span style="color: #008000; font-weight: bold">div</span> 
+  <span style="color: #687822">jn-url</span><span style="color: #666666">=</span><span style="color: #BA2121">&quot;/api/v2/summary.json&quot;</span>
+  <span style="color: #687822">jn-expression</span><span style="color: #666666">=</span><span style="color: #BA2121">&quot;components[name=&#39;Special Programs&#39;]&quot;</span>
+&gt;
+  &lt;<span style="color: #008000; font-weight: bold">h1</span> <span style="color: #687822">id</span><span style="color: #666666">=</span><span style="color: #BA2121">&quot;title&quot;</span> <span style="color: #687822">jn-path</span><span style="color: #666666">=</span><span style="color: #BA2121">&quot;name&quot;</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">h1</span>&gt;
+  &lt;<span style="color: #008000; font-weight: bold">p</span> <span style="color: #687822">id</span><span style="color: #666666">=</span><span style="color: #BA2121">&quot;status&quot;</span> <span style="color: #687822">jn-path</span><span style="color: #666666">=</span><span style="color: #BA2121">&quot;status&quot;</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">p</span>&gt;
+&lt;/<span style="color: #008000; font-weight: bold">div</span>&gt;
+</code></pre></div>
+<p>As you can see, there is a massive difference in having to process data and format it using JavaScript.</p>
+<h2 id="benefits">Benefits</h2>
+<ul>
+<li><strong>Less JS</strong>: more logic driven by delcarative JSONata expressions.</li>
+<li><strong>Reusability</strong>: JSONata expressions are reusable across endpoints and templates.</li>
+<li><strong>Separateion</strong>: Backend returns data, frontend declares how to render it.</li>
+</ul>
+<p>As web apps lean toward microservices, tools like HTMX and JSONata let you modernize UI, update flows without adopting a heavy frontend framework. Your backend can stay API centric, while the frontend remains lightweight, declarative, and HTML centric.</p>
+<p>If you're building with HTMX and find yourself wrestling with JSON responses, this gives you a new pattern to drive dynamic UIs. </p>
+</section>
+
+            </main>
+        </div>
+        <hr><footer>
+    <div class="terminal-mkdocs-footer-grid">
+        <div id="terminal-mkdocs-footer-copyright-info">
+             Site built with <a href="http://www.mkdocs.org">MkDocs</a> and <a href="https://github.com/ntno/mkdocs-terminal">Terminal for MkDocs</a>.
+        </div>
+    </div>
+</footer>
+    </div>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="alertdialog" aria-modal="true" aria-labelledby="searchModalLabel">
+    <div class="modal-dialog modal-lg" role="search">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">Search</h5>
+                <button type="button" class="close btn btn-default btn-ghost" data-dismiss="modal"><span aria-hidden="true">x</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p id="searchInputLabel">Type to start searching</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" aria-labelledby="searchInputLabel" placeholder="" id="mkdocs-search-query" title="Please enter search terms here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No document matches found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</body>
+
+</html>
