@@ -20,7 +20,7 @@
 
     
  
-<title>Smarter JSON Handling for HTMX - Kevin Muscara</title>
+<title>Browser in Browser Attacks - Kevin Muscara</title>
 
 
 <link href="../../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
@@ -149,9 +149,13 @@
             
     
         
-        <span class="
         
-    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">Projects</span>
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Projects</span>
+        
     
     
         
@@ -164,7 +168,9 @@
                 <li class="terminal-mkdocs-side-nav-li-ul-li">
     
         
-        <span class="terminal-mkdocs-side-nav-item--active">Smarter JSON Handling for HTMX</span>
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../smarter-json-handling-for-htmx/">Smarter JSON Handling for HTMX</a>
+        
     
     </li>
             
@@ -322,63 +328,46 @@
 </aside>
             <main id="terminal-mkdocs-main-content">
 <section id="mkdocs-terminal-content">
-    <h1 id="smarter-json-handling-for-htmx">Smarter JSON Handling for HTMX</h1>
-<p>While exploring the possibilities of <a href="https://htmx.org">HTMX</a> in projects, I faced the realization that some APIs needed for projects are not built to meet the standard of a hypermedia system. HTMX expects HTML fragments by default, handling JSON responses often means writing extra JavaScript just to massage that data into DOM updates, which goes against the spirit of HTMX's simplicity.</p>
-<p>This lead to the creation of <a href="https://www.npmjs.com/package/@muscara/htmx-jsonata">htmx-jsonata</a>. A tool that brings the power of <a href="https://jsonata.org/">JSONata</a> into workflows, letting you declaratively transform and bind data without sprawling client side code.</p>
-<h2 id="what-is-it">What is it?</h2>
-<p>JSONata is designed for querying and reshaping JSON responses with powerful expressions. HTMX traditionally works best with HTML over the wire. A server provides HTML partials that are preprocessed and directly swapped into the DOM. There are other htmx-json extensions, but none include expression based transformation out of the box.</p>
-<p>This tool serves as the first library that provides JSON responses a declarative way to drive DOM updates.</p>
-<h2 id="why-is-it-needed">Why is it needed?</h2>
-<p>This tool fills my developer needs for the following reasons:</p>
-<ol>
-<li>
-<p><strong>Keeping logic out of HTML templates</strong>: instead of manually writing DOM updates in JavaScript, I can transform the data structure to only whats needed.</p>
-</li>
-<li>
-<p><strong>Non hypermedia systems</strong>: APIs not following hypermedia principals will still return JSON, this library allows those APIs to still be used in HTMX.</p>
-</li>
-</ol>
-<h2 id="how-it-works">How it works</h2>
-<p>I won't go into a deep dive, but the typical pattern is as follows:</p>
-<ol>
-<li><strong>Issue a GET request</strong> that expects a JSON response.</li>
-<li><strong>Apply a JSONata expression</strong> to the JSON response to transform the data.</li>
-<li><strong>Update the DOM</strong> based on the transformed result by binding values to elements.</li>
-</ol>
-<p>Before <code>htmx-jsonata</code>:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>&lt;<span style="color: #008000; font-weight: bold">h1</span> <span style="color: #687822">id</span><span style="color: #666">=</span><span style="color: #BA2121">&quot;title&quot;</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">h1</span>&gt;
-&lt;<span style="color: #008000; font-weight: bold">p</span> <span style="color: #687822">id</span><span style="color: #666">=</span><span style="color: #BA2121">&quot;status&quot;</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">p</span>&gt;
-
-&lt;<span style="color: #008000; font-weight: bold">script</span>&gt;
-<span style="color: #BBB">  </span><span style="color: #3D7B7B; font-style: italic">// Make the GET request</span>
-<span style="color: #BBB">  </span>fetch(<span style="color: #BA2121">&quot;/api/v2/summary.json&quot;</span>).then(res<span style="color: #BBB"> </span>=&gt;<span style="color: #BBB"> </span>res.json()).then(data<span style="color: #BBB"> </span>=&gt;<span style="color: #BBB"> </span>{
-<span style="color: #BBB">    </span><span style="color: #3D7B7B; font-style: italic">// Extract what you need from the data</span>
-<span style="color: #BBB">    </span><span style="color: #008000; font-weight: bold">let</span><span style="color: #BBB"> </span>specialPrograms<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>data.components.filter(resource<span style="color: #BBB"> </span>=&gt;<span style="color: #BBB"> </span>resource.title<span style="color: #BBB"> </span><span style="color: #666">==</span><span style="color: #BBB"> </span><span style="color: #BA2121">&#39;Special Programs&#39;</span>);
-<span style="color: #BBB">    </span><span style="color: #008000; font-weight: bold">let</span><span style="color: #BBB"> </span>{<span style="color: #BBB"> </span>name,<span style="color: #BBB"> </span>status<span style="color: #BBB"> </span>}<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>specialPrograms;
-
-<span style="color: #BBB">    </span><span style="color: #008000">document</span>.querySelector(<span style="color: #BA2121">&quot;#title&quot;</span>).textContent<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>name;
-<span style="color: #BBB">    </span><span style="color: #008000">document</span>.querySelector(<span style="color: #BA2121">&quot;#count&quot;</span>).textContent<span style="color: #BBB"> </span><span style="color: #666">=</span><span style="color: #BBB"> </span>status;
-<span style="color: #BBB">  </span>});
-&lt;/<span style="color: #008000; font-weight: bold">script</span>&gt;
-</code></pre></div>
-<p>After <code>htmx-jsonata</code>:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>&lt;<span style="color: #008000; font-weight: bold">div</span> 
-  <span style="color: #687822">jn-url</span><span style="color: #666">=</span><span style="color: #BA2121">&quot;/api/v2/summary.json&quot;</span>
-  <span style="color: #687822">jn-expression</span><span style="color: #666">=</span><span style="color: #BA2121">&quot;components[name=&#39;Special Programs&#39;]&quot;</span>
-&gt;
-  &lt;<span style="color: #008000; font-weight: bold">h1</span> <span style="color: #687822">id</span><span style="color: #666">=</span><span style="color: #BA2121">&quot;title&quot;</span> <span style="color: #687822">jn-path</span><span style="color: #666">=</span><span style="color: #BA2121">&quot;name&quot;</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">h1</span>&gt;
-  &lt;<span style="color: #008000; font-weight: bold">p</span> <span style="color: #687822">id</span><span style="color: #666">=</span><span style="color: #BA2121">&quot;status&quot;</span> <span style="color: #687822">jn-path</span><span style="color: #666">=</span><span style="color: #BA2121">&quot;status&quot;</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">p</span>&gt;
-&lt;/<span style="color: #008000; font-weight: bold">div</span>&gt;
-</code></pre></div>
-<p>As you can see, there is a massive difference in having to process data and format it using JavaScript.</p>
-<h2 id="benefits">Benefits</h2>
+    <h1 id="browser-in-browser-attacks">Browser in Browser Attacks</h1>
+<p>Phishing attacks have been around for decades, but they continue to evolve. As users are getting better at spotting red flags (mispelled emails, shady links) attackers adapt with more convincing techniques. One really effective example of this evolution is <strong>Browser-in-Browser (BiB) phishing attacks</strong></p>
+<h2 id="what-is-a-browser-in-browser-attack">What is a Browser-in-Browser Attack?</h2>
+<p>A Browser-in-Browser attack is a phishing technique that mimics a legitmate browser window inside your actual browser.</p>
+<p>Instead of redirecting you to a fake login page on a suspicious domain, the attacker displays an almost perfect replicate pop-up window complete with the following features:</p>
 <ul>
-<li><strong>Less JS</strong>: more logic driven by delcarative JSONata expressions.</li>
-<li><strong>Reusability</strong>: JSONata expressions are reusable across endpoints and templates.</li>
-<li><strong>Separateion</strong>: Backend returns data, frontend declares how to render it.</li>
+<li>A realistic browser frame</li>
+<li>A convincing URL bar</li>
+<li>Familiar branding (Google, Microsoft, etc.)</li>
+<li>A "Sign in with..." prompt that looks completely normal</li>
 </ul>
-<p>As web apps lean toward microservices, tools like HTMX and JSONata let you modernize UI, update flows without adopting a heavy frontend framework. Your backend can stay API centric, while the frontend remains lightweight, declarative, and HTML centric.</p>
-<p>If you're building with HTMX and find yourself wrestling with JSON responses, this gives you a new pattern to drive dynamic UIs. </p>
+<p>But herethe trick is, it's not a real browser window at all. It's just plain HTML, CSS, and JavaScript rendered inside the page you're already on.</p>
+<h2 id="why-these-attacks-are-effective">Why These Attacks Are Effective</h2>
+<p>BiB attacks work because they exploit trust in visual cues.</p>
+<p>Most users have learned to:</p>
+<ul>
+<li>Check URL address.</li>
+<li>Look for HTTPS.</li>
+<li>Trust familiar login pop-ups</li>
+</ul>
+<p>BiB attacks abuse this behavior by faking those exact signals. Even security aware users can fall for these attacks if they're distracted or in a hurry.</p>
+<h2 id="education-gap">Education Gap</h2>
+<p>Despite how effective BiB attacks are, many people have never heard of them.</p>
+<p>Security awareness training often focuses on:</p>
+<ul>
+<li>Email phishing</li>
+<li>Malicious links</li>
+<li>Attachments and malware</li>
+</ul>
+<p>But modern web attacks like BiB phishing live in a gray area, simple, visually convincing, and psychologically clever. That's where education needs to improve.</p>
+<h2 id="safe-way-to-learn-demo-site">Safe Way to Learn: Demo Site</h2>
+<p>To help address this gap, I built <a href="https://clever-oauth-authorize-idb0dd50c.kevinmuscara.deno.net/">this BiB phishing demo</a> designed purely for <strong>education and awareness</strong></p>
+<p>The goal is simple: Let people <em>experience</em> how convincing these attacks are without putting them at risk.</p>
+<p>What the demo shows:</p>
+<ul>
+<li>A realistic fake login pop-up inside a browser</li>
+<li>How difficult it is to distinguish from a real authentication window</li>
+<li>Visual clues that reveal its not a real browser window once you know what to look for</li>
+</ul>
+<p>Seeing the attack in action is far more effective than just reading about it.</p>
 </section>
 
             </main>
