@@ -48,12 +48,9 @@ Before `htmx-jsonata`:
 After `htmx-jsonata`:
 
 ```HTML
-<div 
-  jn-url="/api/v2/summary.json"
-  jn-expression="components[name='Special Programs']"
->
-  <h1 id="title" jn-path="name"></h1>
-  <p id="status" jn-path="status"></p>
+<div jn-url="/api/v2/summary.json" jn-query="components[name='Special Programs']">
+  <h1>${name}</h1>
+  <p>${status}</p>
 </div>
 ```
 
@@ -68,3 +65,7 @@ As you can see, there is a massive difference in having to process data and form
 As web apps lean toward microservices, tools like HTMX and JSONata let you modernize UI, update flows without adopting a heavy frontend framework. Your backend can stay API centric, while the frontend remains lightweight, declarative, and HTML centric.
 
 If you're building with HTMX and find yourself wrestling with JSON responses, this gives you a new pattern to drive dynamic UIs. 
+
+## Try it out
+
+Try it out yourself using the [live playground](https://htmx-jsonata.muscara.net)

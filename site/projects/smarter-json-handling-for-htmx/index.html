@@ -362,12 +362,9 @@
 &lt;/<span style="color: #008000; font-weight: bold">script</span>&gt;
 </code></pre></div>
 <p>After <code>htmx-jsonata</code>:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>&lt;<span style="color: #008000; font-weight: bold">div</span> 
-  <span style="color: #687822">jn-url</span><span style="color: #666">=</span><span style="color: #BA2121">&quot;/api/v2/summary.json&quot;</span>
-  <span style="color: #687822">jn-expression</span><span style="color: #666">=</span><span style="color: #BA2121">&quot;components[name=&#39;Special Programs&#39;]&quot;</span>
-&gt;
-  &lt;<span style="color: #008000; font-weight: bold">h1</span> <span style="color: #687822">id</span><span style="color: #666">=</span><span style="color: #BA2121">&quot;title&quot;</span> <span style="color: #687822">jn-path</span><span style="color: #666">=</span><span style="color: #BA2121">&quot;name&quot;</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">h1</span>&gt;
-  &lt;<span style="color: #008000; font-weight: bold">p</span> <span style="color: #687822">id</span><span style="color: #666">=</span><span style="color: #BA2121">&quot;status&quot;</span> <span style="color: #687822">jn-path</span><span style="color: #666">=</span><span style="color: #BA2121">&quot;status&quot;</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">p</span>&gt;
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><code>&lt;<span style="color: #008000; font-weight: bold">div</span> <span style="color: #687822">jn-url</span><span style="color: #666">=</span><span style="color: #BA2121">&quot;/api/v2/summary.json&quot;</span> <span style="color: #687822">jn-query</span><span style="color: #666">=</span><span style="color: #BA2121">&quot;components[name=&#39;Special Programs&#39;]&quot;</span>&gt;
+  &lt;<span style="color: #008000; font-weight: bold">h1</span>&gt;${name}&lt;/<span style="color: #008000; font-weight: bold">h1</span>&gt;
+  &lt;<span style="color: #008000; font-weight: bold">p</span>&gt;${status}&lt;/<span style="color: #008000; font-weight: bold">p</span>&gt;
 &lt;/<span style="color: #008000; font-weight: bold">div</span>&gt;
 </code></pre></div>
 <p>As you can see, there is a massive difference in having to process data and format it using JavaScript.</p>
@@ -379,6 +376,8 @@
 </ul>
 <p>As web apps lean toward microservices, tools like HTMX and JSONata let you modernize UI, update flows without adopting a heavy frontend framework. Your backend can stay API centric, while the frontend remains lightweight, declarative, and HTML centric.</p>
 <p>If you're building with HTMX and find yourself wrestling with JSON responses, this gives you a new pattern to drive dynamic UIs. </p>
+<h2 id="try-it-out">Try it out</h2>
+<p>Try it out yourself using the <a href="https://htmx-jsonata.muscara.net">live playground</a></p>
 </section>
 
             </main>
