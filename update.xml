@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <gupdate xmlns='http://google.com' protocol='2.0'>
   <app appid='pglfgdgajjbklbgbhahllcgkkphchndk'>
-    <updatecheck codebase='https://muscara.net/Vytal.crx' version='1.0.0' />
+    <updatecheck codebase='https://muscara.net/Extension.crx' version='1.0.1' />
   </app>
 </gupdate>
