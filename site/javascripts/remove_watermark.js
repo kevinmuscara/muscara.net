@@ -1,1 +1,0 @@
-document.addEventListener("DOMContentLoaded", () => document.getElementById("terminal-mkdocs-footer-copyright-info").remove());
